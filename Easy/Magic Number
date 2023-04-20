@@ -1,0 +1,21 @@
+class Solution{
+    static long nthMagicNo(int n){
+        //complete the function here
+        long ans = 0;
+        long fact = 5;
+        
+        while(n!=0)
+        {
+            
+            if((n&1)==1)
+            {
+                
+                ans += fact;
+            }
+            fact = fact*5;
+            n=n>>1;
+            
+        }
+        return ans%((1000000000+7));
+    }
+}
