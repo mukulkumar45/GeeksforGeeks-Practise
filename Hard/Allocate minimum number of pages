@@ -1,0 +1,63 @@
+
+class Solution 
+{
+    public:
+    //Function to find minimum number of pages.
+    bool isPossibleSol(int A[], int N, int M,int mid)
+    {
+        int studentCount = 1;
+        int pageCount = 0;
+        
+        for(int i = 0;i<N;i++)
+        {
+            if(pageCount + A[i]<=mid)
+            {
+                pageCount+= A[i];
+            }
+            else
+            {
+                studentCount++;
+                pageCount = A[i];
+                if(studentCount > M || A[i] > mid)
+                {
+                return false;
+                }
+                
+            }
+        }
+        return true;
+        
+    }
+    
+    
+    int findPages(int A[], int N, int M) 
+    {
+        //code here
+        if(N<M)
+        {
+            return -1;
+        }
+        int s = 0;
+        int sum = 0;
+        for(int i = 0;i<N;i++)
+        {
+            sum += A[i];
+        }
+        int e = sum;
+        int mid = s + (e-s)/2;
+        int ans = -1;
+        while(s<=e)
+        {
+            if(isPossibleSol(A,N,M,mid))
+            {
+                ans = mid;
+                e = mid - 1;
+            }
+            else{
+                s = mid + 1;
+            }
+            mid = s + (e-s)/2;
+        }
+        return ans;
+    }
+};
