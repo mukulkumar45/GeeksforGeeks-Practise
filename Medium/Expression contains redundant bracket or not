@@ -1,0 +1,32 @@
+class Solution {
+  public:
+    int checkRedundancy(string s) {
+        // code here
+        stack<char> st;
+        int ans = 0;
+        for(int i = 0;i<s.length();i++){
+            
+            char ch = s[i];
+            
+            if(ch == '+' || ch == '-' || ch =='/' || ch == '*'){
+                st.push(ch);
+            }
+            
+            else if(ch == '('){
+                st.push(ch);
+            }
+            
+            else if(ch== ')'){ 
+                if(st.top() == '('){
+                    ans = 1;
+                }
+                
+                while(st.top()== '+' || st.top()== '-' ||st.top()== '*'||st.top()== '/'){
+                    st.pop();
+                }
+                st.pop();
+            }
+        }
+        return ans;
+    }
+};
